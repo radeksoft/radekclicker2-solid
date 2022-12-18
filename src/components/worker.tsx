@@ -1,6 +1,7 @@
 import type { Component } from 'solid-js';
 import { radekCount, setRadekCount, radeksPerSecond, setRadeksPerSecond } from '../game';
 import { WORKERS } from '../workers';
+import radek from "./../public/media/placeholder_radek.png"
 
 // BRUH
 export type WorkerProps = {
@@ -26,11 +27,18 @@ export const Worker: Component<WorkerProps> = props => {
     const buyable = () => radekCount() >= cost;
 
     return (
-        <div class={`flex flex-col items-center rounded-md border-4 border-pink-400 bg-pink-100 p-1 ${!buyable() && "opacity-40"}`}>
-            <p>{name}</p>
-            <p>{text}</p>
-            <p>Cena: {cost}</p>
-            <button onClick={() => buyMe()}>BUY</button>
+        <div class='flex flex-row border border-black items-center rounded'>
+            <img src={radek} alt="RADEK" class='relative m-3 rounded-lg overflow-hidden w-32' />
+            <div class='flex flex-col w-full pr-3'>
+                <div class='pr-3'>
+                    <h3 class='mt-3'>{name}</h3>
+                    <p class='text-sm'>{text}</p>
+                </div>
+                
+                <button class={`border shadow my-3 p-1 rounded mx-auto w-full bg-green-400 opacity-40 ${!buyable() && 'cursor-default'} ${buyable() && 'opacity-100 hover:bg-green-500 '}`} onClick={() => buyMe()}>
+                    <span class='font-extrabold'>{cost} R</span>
+                </button>
+            </div>
         </div>
-    );
+    )
 };
