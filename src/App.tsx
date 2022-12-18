@@ -1,8 +1,18 @@
 import type { Component } from 'solid-js';
+import { Leaderboard } from './components/leaderboard';
+
+import { RadekButton } from './components/radek-button';
+import { RadekCount } from './components/radek-count';
+import { Shop } from './components/shop';
 
 const App: Component = () => {
     return (
-        <p class="text-4xl text-green-700 text-center py-20">Hello tailwind!</p>
+        <div class="flex flex-col flex-nowrap items-center justify-start gap-[20vh] py-[10vh] min-h-screen">
+            <RadekCount />
+            <RadekButton />
+            <Leaderboard />
+            <Shop />
+        </div>
     );
 };
 
