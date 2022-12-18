@@ -14,6 +14,14 @@ const wordForm = (pocet: number, slova: [string, string, string]) => {
     return slova[2];
 };
 
+const howManyRadeks = () => {
+    if (radeksPerSecond() < 100)
+        return radeksPerSecond().toFixed(1).toString()
+    else if (radeksPerSecond() < 9999999999999999)
+        return Math.floor(radeksPerSecond()).toString()
+    else
+        return "kurva hodně"
+}
 
 export const RadekCount: Component = () => {
     return (
@@ -21,7 +29,7 @@ export const RadekCount: Component = () => {
             <p>Máš</p>
             <p class="font-bold text-2xl">{Math.floor(radekCount())}</p>
             <p>{wordForm(Math.floor(radekCount()), ['Radeka', 'Radeky', 'Radeků'])}</p>
-            <p>Generuješ {radeksPerSecond()} Radeků za sekundu.</p>
+            <p>Generuješ {howManyRadeks()} Radeků za sekundu.</p>
         </div>
     );
 };
