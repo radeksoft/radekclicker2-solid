@@ -16,15 +16,17 @@ export const Worker: Component<WorkerProps> = props => {
     } = props.worker;
 
     const buyMe = () => {
-        if (radekCount() < cost)
+        if (!buyable())
             return;
 
         setRadekCount(radekCount() - cost);
         setRadeksPerSecond(radeksPerSecond() + rps);
     };
 
+    const buyable = () => radekCount() >= cost;
+
     return (
-        <div class="flex flex-col items-center rounded-md border-4 border-pink-400 bg-pink-100 p-1">
+        <div class={`flex flex-col items-center rounded-md border-4 border-pink-400 bg-pink-100 p-1 ${!buyable() && "opacity-40"}`}>
             <p>{name}</p>
             <p>{text}</p>
             <p>Cena: {cost}</p>
