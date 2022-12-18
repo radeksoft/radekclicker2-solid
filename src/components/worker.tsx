@@ -28,10 +28,13 @@ export const Worker: Component<WorkerProps> = props => {
 
     return (
         <div class='flex flex-row border border-black items-center rounded'>
-            <img src={radek} alt="RADEK" class='relative m-3 rounded-lg overflow-hidden w-32' />
+            <img src={radek} alt="RADEK" class='relative m-3 rounded-lg overflow-hidden w-40' />
             <div class='flex flex-col w-full pr-3'>
                 <div class='pr-3'>
-                    <h3 class='mt-3'>{name}</h3>
+                    <div class='flex flex-col'>
+                        <h3 class='mt-3'>{name}</h3>
+                        <p class='text-gray-800 text-xs font-extrabold'>{rps} R/s</p>
+                    </div>
                     <p class='text-sm'>{text}</p>
                 </div>
                 
