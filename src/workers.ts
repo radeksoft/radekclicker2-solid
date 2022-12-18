@@ -2,6 +2,7 @@ export const WORKERS = [
     {
         name: 'Radek Maker',
         text: '1 Radek za 10 sekund',
+        img: '/',
         rps: 0.1,
         cost: 10,
     },

@@ -20,8 +20,8 @@ export const RadekCount: Component = () => {
         <div class="flex flex-col items-center">
             <p>Máš</p>
             <p class="font-bold text-2xl">{Math.floor(radekCount())}</p>
-            <p>{wordForm(Math.floor(radekCount()), ['Radka', 'Radky', 'Radků'])}</p>
-            <p>Generuješ {radeksPerSecond()} Radků za sekundu.</p>
+            <p>{wordForm(Math.floor(radekCount()), ['Radeka', 'Radeky', 'Radeků'])}</p>
+            <p>Generuješ {radeksPerSecond()} Radeků za sekundu.</p>
         </div>
     );
 };
