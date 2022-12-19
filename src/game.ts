@@ -30,7 +30,12 @@ const createLocalStorageNumberArraySignal = (key: string, defaultValue: number[]
         first = stringToArray(loaded);
     }
 
-    const theSignal = createSignal(first);
+    const theSignal = createSignal(first, { equals: false });
+
+    createEffect(() => {
+        const [signalValue] = theSignal;
+        localStorage.setItem(key, arrayToString(signalValue()));
+    });
 
     return theSignal;
 };
@@ -77,10 +82,6 @@ setInterval(() => {
     console.log('storing to LS', radeksPerSecond(), radekCount());
     localStorage.setItem('radeksPerSecond', radeksPerSecond().toString());
     localStorage.setItem('radekCount', radekCount().toString());
-
-    // There could occur a situation where the user buys a lot and then immediately refreshes
-    // and the progress is not saved properly, but whatever
-    localStorage.setItem('workerCount', arrayToString(workerCount()));
 }, 1500);
 
 setInterval(() => {
@@ -103,6 +104,7 @@ exportToWindow({
     reset() {
         setRadeksPerSecond(0);
         setRadekCount(0);
+        setWorkerCount(new Array(WORKERS.length).fill(0));
     },
     workerCount,
     setWorkerCount,
