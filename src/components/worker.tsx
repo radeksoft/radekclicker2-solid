@@ -62,7 +62,7 @@ export const Worker: Component<WorkerProps> = props => {
     }
 
     return (
-        <div class='flex flex-row border-4 border-slate-300 items-center rounded bg-slate-200 shadow-md'>
+        <div class='flex flex-row border-4 border-slate-300 items-center rounded-lg bg-slate-200 shadow-md'>
             <img src={`/src/public/worker_icons/${img}`} alt="RADEK" class='relative m-3 rounded-lg overflow-hidden w-40' />
             <div class='flex flex-col w-full pr-3'>
                 <div class='pr-3'>
