@@ -6,6 +6,9 @@ module.exports = {
     ],
     darkMode: 'class',
     theme: {
+        fontFamily: {
+          sans: ['Balsamiq Sans']
+        },
         extend: {
             keyframes: {
               button: {
