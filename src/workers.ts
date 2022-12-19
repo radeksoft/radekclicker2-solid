@@ -52,7 +52,7 @@ export const WORKERS = [
     },
     {
         name: 'Hultron',
-        text: 'směr na Hultron planetu 🎶',
+        text: '🎶 směr na Hultron planetu 🎶',
         img: hultron,
         rps: 0.1,
         cost: 50,
