@@ -14,22 +14,31 @@ const wordForm = (pocet: number, slova: [string, string, string]) => {
     return slova[2];
 };
 
-const howManyRadeks = () => {
-    if (radeksPerSecond() < 100)
-        return radeksPerSecond().toFixed(1).toString()
-    else if (radeksPerSecond() < 9999999999999999)
-        return Math.floor(radeksPerSecond()).toString()
+const textOverflow = (n: number) => {
+    if (n < 100)
+        return n.toFixed(1);
+    
+    n = Math.floor(n);
+    
+    if (n < 10_000_000)
+        return `${(n / 1_000_000).toFixed(2)} milionů`;
+    else if (n < 10_000_000_000)
+        return `${(n / 1_000_000_000).toFixed(2)} miliard`;
+    else if (n < 10_000_000_000_000)
+        return `${(n / 1_000_000_000_000).toFixed(2)} bilionů`;
+    else if (n < 10_000_000_000_000_000)
+        return `${(n / 1_000_000_000_000_000).toFixed(2)} kvadrilionů`;
     else
-        return "kurva hodně"
+        return 'kurva hodně';
 }
 
 export const RadekCount: Component = () => {
     return (
         <div class="flex flex-col items-center">
             <p>Máš</p>
-            <p class="font-bold text-2xl">{Math.floor(radekCount())}</p>
+            <p class="font-bold text-2xl">{textOverflow(radekCount())}</p>
             <p>{wordForm(Math.floor(radekCount()), ['Radeka', 'Radeky', 'Radeků'])}</p>
-            <p>Generuješ {howManyRadeks()} Radeků za sekundu.</p>
+            <p>Generuješ {textOverflow(radeksPerSecond())} Radeků za sekundu.</p>
         </div>
     );
 };
