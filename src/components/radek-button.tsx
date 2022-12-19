@@ -1,12 +1,18 @@
-import type { Component } from 'solid-js';
+import { Component, createSignal } from 'solid-js';
 import { radekCount, setRadekCount } from '../game';
-import radek from "./../public/media/placeholder_radek.png"
+import radekuvYen from "./../public/media/Radekuv_yen.png";
 
 export const RadekButton: Component = () => {
+    const [anim, setAnim] = createSignal(false);
+
     return (
         <div class='w-full'>
-            <button class='w-full' onClick={() => setRadekCount(radekCount() + 1)}>
-                <img src={radek} alt="RADEK" width={300} class='mx-auto'/>
+            <button class={`w-full ${anim() && 'animate-button'}`} onClick={() => {
+                    setRadekCount(radekCount() + 1);
+                    setAnim(true);
+                }} onAnimationEnd={() => setAnim(false)}>
+
+                <img src={radekuvYen} alt="RADEK" width={300} class='mx-auto'/>
             </button>
         </div>
     );

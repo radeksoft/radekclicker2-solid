@@ -6,7 +6,17 @@ module.exports = {
     ],
     darkMode: 'class',
     theme: {
-        extend: {},
+        extend: {
+            keyframes: {
+              button: {
+                "0%, 100%": { transform: "scale(1)" },
+                "50%": { transform: "scale(0.92)" }
+              }
+            },
+            animation: {
+              button: "button 80ms ease-in-out"
+            },
+        },
     },
     plugins: [],
 };
