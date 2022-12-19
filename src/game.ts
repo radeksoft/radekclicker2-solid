@@ -1,4 +1,5 @@
 import { createEffect, createSignal } from "solid-js";
+import { WORKERS } from "./workers";
 
 const createLocalStorageNumberSignal = (key: string, defaultValue: number) => {
     const loaded = localStorage.getItem(key);
@@ -19,8 +20,32 @@ const createLocalStorageNumberSignal = (key: string, defaultValue: number) => {
     return theSignal;
 };
 
+const createLocalStorageNumberArraySignal = (key: string, defaultValue: number[]) => {
+    const loaded = localStorage.getItem(key);
+    let first: number[];
+
+    if (!loaded) {
+        first = defaultValue;
+    } else {
+        first = stringToArray(loaded);
+    }
+
+    const theSignal = createSignal(first);
+
+    return theSignal;
+};
+
+const arrayToString = (array: number[]) => {
+    return array.join(';');
+}
+
+const stringToArray = (s: string) => {
+    return s.split(';').map(x => Number.parseFloat(x));
+}
+
 export const [radeksPerSecond, setRadeksPerSecond] = createLocalStorageNumberSignal('radeksPerSecond', 0);
 export const [radekCount, setRadekCount] = createLocalStorageNumberSignal('radekCount', 0);
+export const [workerCount, setWorkerCount] = createLocalStorageNumberArraySignal('workerCount', new Array(WORKERS.length).fill(0));
 
 const fps = 25;
 
@@ -52,6 +77,10 @@ setInterval(() => {
     console.log('storing to LS', radeksPerSecond(), radekCount());
     localStorage.setItem('radeksPerSecond', radeksPerSecond().toString());
     localStorage.setItem('radekCount', radekCount().toString());
+
+    // There could occur a situation where the user buys a lot and then immediately refreshes
+    // and the progress is not saved properly, but whatever
+    localStorage.setItem('workerCount', arrayToString(workerCount()));
 }, 1500);
 
 setInterval(() => {
@@ -65,6 +94,7 @@ const exportToWindow = (obj: {[key: string]: any}) => {
     }
 }
 
+// TODO remove in prod
 exportToWindow({
     radekCount,
     setRadekCount,
@@ -74,4 +104,6 @@ exportToWindow({
         setRadeksPerSecond(0);
         setRadekCount(0);
     },
+    workerCount,
+    setWorkerCount,
 });

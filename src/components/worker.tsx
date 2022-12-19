@@ -1,11 +1,11 @@
 import { Component, createSignal } from 'solid-js';
-import { radekCount, setRadekCount, radeksPerSecond, setRadeksPerSecond } from '../game';
+import { radekCount, setRadekCount, radeksPerSecond, setRadeksPerSecond, setWorkerCount, workerCount } from '../game';
 import { WORKERS } from '../workers';
-import radek from "./../public/media/placeholder_radek.png"
 
 // BRUH
 export type WorkerProps = {
     worker: typeof WORKERS[0],
+    index: number,
 };
 
 export const Worker: Component<WorkerProps> = props => {
@@ -16,6 +16,7 @@ export const Worker: Component<WorkerProps> = props => {
         rps,
         cost,
     } = props.worker;
+    const index = props.index;
 
     const buyMe = () => {
         if (!buyable())
@@ -23,6 +24,11 @@ export const Worker: Component<WorkerProps> = props => {
 
         setRadekCount(radekCount() - cost);
         setRadeksPerSecond(radeksPerSecond() + rps);
+
+        const a = workerCount();
+        a[index] += 1; //TODO: edit me
+
+        setWorkerCount(a);
     };
 
     const buyable = () => radekCount() >= cost;
@@ -63,7 +69,7 @@ export const Worker: Component<WorkerProps> = props => {
                     <p class='text-sm'>{text}</p>
                 </div>
                 
-                <button class={`border shadow my-3 p-1 rounded mx-auto w-full bg-blue-300 opacity-40 ${!buyable() && 'cursor-default'} ${buyable() && 'opacity-100 hover:bg-blue-400 '} ${anim() && 'animate-button'}`} onClick={() => {
+                <button class={`border shadow my-3 p-1 rounded mx-auto w-full bg-gradient-to-br from-[#79c4ee]/[.8] to-[#6a81b5]/[.8] opacity-40 ${!buyable() && 'cursor-default'} ${buyable() && 'opacity-100 hover:bg-blue-400 '} ${anim() && 'animate-button'}`} onClick={() => {
                         buyMe();
                         setAnim(true);
                     }} onAnimationEnd={() => setAnim(false)}>
