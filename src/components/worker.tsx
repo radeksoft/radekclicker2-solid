@@ -22,7 +22,7 @@ export const Worker: Component<WorkerProps> = props => {
         if (!buyable())
             return;
 
-        setRadekCount(radekCount() - cost);
+        setRadekCount(radekCount() - calculateCost());
         setRadeksPerSecond(radeksPerSecond() + rps);
 
         const a = workerCount();
@@ -31,7 +31,11 @@ export const Worker: Component<WorkerProps> = props => {
         setWorkerCount(a);
     };
 
-    const buyable = () => radekCount() >= cost;
+    const currentWorkers = () => workerCount()[index];
+
+    const calculateCost = () => cost * Math.floor(Math.pow(1.2, currentWorkers()/2));
+
+    const buyable = () => radekCount() >= calculateCost();
 
     const [anim, setAnim] = createSignal(false);
 
@@ -74,7 +78,7 @@ export const Worker: Component<WorkerProps> = props => {
                         setAnim(true);
                     }} onAnimationEnd={() => setAnim(false)}>
 
-                    <span class='font-extrabold'>{textOverflow(cost)} R</span>
+                    <span class='font-extrabold'>{textOverflow(calculateCost())} R</span>
                 </button>
             </div>
         </div>
