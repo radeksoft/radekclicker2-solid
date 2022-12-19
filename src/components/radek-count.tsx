@@ -38,11 +38,10 @@ const textOverflow = (n: number) => {
 
 export const RadekCount: Component = () => {
     return (
-        <div class="flex flex-col items-center">
-            <p>Máš</p>
+        <div class="flex flex-col items-center w-full bg-black/[.15] ">
             <p class="font-bold text-2xl">{textOverflow(radekCount()).replace('.', ',')}</p>
-            <p>{wordForm(Math.floor(radekCount()), ['Radeka', 'Radeky', 'Radeků'])}</p>
-            <p>Generuješ {textOverflow(radeksPerSecond()).replace('.', ',')} Radeků za sekundu.</p>
+            <p class='-mt-1 text-xs font-bold'>{wordForm(Math.floor(radekCount()), ['Radekův Yen', 'Radekovy Yeny', 'Radekových Yenů'])}</p>
+            <p class='my-1'>{textOverflow(radeksPerSecond()).replace('.', ',')} {wordForm(Math.floor(radekCount()), ['Radekův Yen', 'Radekovy Yeny', 'Radekových Yenů'])}/s</p>
         </div>
     );
 };
