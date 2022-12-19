@@ -8,7 +8,7 @@ import { Shop } from './components/shop';
 
 const App: Component = () => {
     return (
-        <div class='bg-[#98D1F2]'>
+        <div class='bg-gradient-to-br from-[#79c4ee] to-[#6a81b5]'>
             <Header />
             <div class="flex flex-col flex-nowrap items-center justify-start gap-10 py-2 min-h-screen">
                 <RadekCount />
