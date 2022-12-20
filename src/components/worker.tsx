@@ -26,7 +26,7 @@ export const Worker: Component<WorkerProps> = props => {
         setRadeksPerSecond(radeksPerSecond() + rps);
 
         const a = workerCount();
-        a[index] += 1; //TODO: edit me
+        a[index] += 1;
 
         setWorkerCount(a);
     };
@@ -66,9 +66,14 @@ export const Worker: Component<WorkerProps> = props => {
             <img src={img} alt="RADEK" class='relative m-3 rounded-lg overflow-hidden w-40' />
             <div class='flex flex-col w-full pr-3'>
                 <div class='pr-3'>
-                    <div class='flex flex-col'>
-                        <h3 class='mt-3 font-bold'>{name}</h3>
-                        <p class='text-gray-800 text-xs font-extrabold -mt-1 pb-1'>{rps} R/s</p>
+                    <div class='flex flex-row justify-between'>
+                        <div class='flex flex-col mt-3'>
+                            <h3 class='font-bold'>{name}</h3>
+                            <p class='text-gray-800 text-xs font-extrabold -mt-1 pb-1'>{rps} R/s</p>
+                        </div>
+                        <div class='mt-4'>
+                            <p class='my-auto text-slate-800'>{currentWorkers()}x</p>
+                        </div>
                     </div>
                     <p class='text-sm truncate'>{text}</p>
                 </div>
