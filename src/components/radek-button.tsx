@@ -12,7 +12,7 @@ export const RadekButton: Component = () => {
                     setAnim(true);
                 }} onAnimationEnd={() => setAnim(false)}>
 
-                <img src={radekuvYen} alt="RADEK" width={300} class='mx-auto pointer-events-none selection:bg-transparent'/>
+                <img src={radekuvYen} alt="RADEK" class='mx-auto pointer-events-none selection:bg-transparent w-[100%] px-7'/>
             </button>
         </div>
     );
