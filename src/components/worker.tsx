@@ -62,7 +62,7 @@ export const Worker: Component<WorkerProps> = props => {
     }
 
     return (
-        <div class='flex flex-row border-4 border-slate-300 items-center rounded-lg bg-slate-200 shadow-md'>
+        <div class='flex flex-row border-4 border-slate-300 items-center rounded-2xl bg-slate-200 shadow-md'>
             <img src={img} alt="RADEK" class='relative m-3 rounded-lg overflow-hidden w-40' />
             <div class='flex flex-col w-full pr-3'>
                 <div class='pr-3'>
@@ -73,7 +73,7 @@ export const Worker: Component<WorkerProps> = props => {
                     <p class='text-sm truncate'>{text}</p>
                 </div>
                 
-                <button class={`border shadow my-3 p-1 rounded mx-auto w-full bg-gradient-to-br from-[#79c4ee]/[.8] to-[#6a81b5]/[.8] opacity-40 ${!buyable() && 'cursor-default'} ${buyable() && 'opacity-100 hover:bg-blue-400 '} ${anim() && 'animate-button'}`} onClick={() => {
+                <button class={`border shadow my-3 p-1 rounded-xl mx-auto w-full bg-gradient-to-br from-[#79c4ee]/[.8] to-[#6a81b5]/[.8] opacity-40 ${!buyable() && 'cursor-default'} ${buyable() && 'opacity-100 hover:bg-blue-400 '} ${anim() && 'animate-button'}`} onClick={() => {
                         buyMe();
                         setAnim(true);
                     }} onAnimationEnd={() => setAnim(false)}>
