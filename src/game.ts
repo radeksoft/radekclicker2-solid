@@ -1,7 +1,7 @@
 import { createEffect, createSignal } from "solid-js";
 import { WORKERS } from "./workers";
 
-const createLocalStorageNumberSignal = (key: string, defaultValue: number) => {
+const createLocalStorageNumberSignal = (key: string, defaultValue: number, saveOnChange: boolean) => {
     const loaded = localStorage.getItem(key);
     let first: number;
     if (!loaded) {
@@ -12,10 +12,12 @@ const createLocalStorageNumberSignal = (key: string, defaultValue: number) => {
 
     const theSignal = createSignal(first);
 
-    // createEffect(() => {
-    //     const [signalValue] = theSignal;
-    //     localStorage.setItem(key, signalValue().toString());
-    // });
+    if (saveOnChange) {
+        createEffect(() => {
+            const [signalValue] = theSignal;
+            localStorage.setItem(key, signalValue().toString());
+        });
+    }
 
     return theSignal;
 };
@@ -48,9 +50,44 @@ const stringToArray = (s: string) => {
     return s.split(';').map(x => Number.parseFloat(x));
 }
 
-export const [radeksPerSecond, setRadeksPerSecond] = createLocalStorageNumberSignal('radeksPerSecond', 0);
-export const [radekCount, setRadekCount] = createLocalStorageNumberSignal('radekCount', 0);
+export const textOverflow = (n: number) => {
+    if (n < 100)
+        return n.toFixed(1);
+    
+    n = Math.floor(n);
+
+    if (n < 9_000)
+        return n.toString();
+    else if (n < 999_000)
+        return `${(n / 1_000).toFixed(1)} tisíc`;
+    else if (n < 999_000_000)
+        return `${(n / 1_000_000).toFixed(2)} milionů`;
+    else if (n < 999_000_000_000)
+        return `${(n / 1_000_000_000).toFixed(2)} miliard`;
+    else if (n < 999_000_000_000_000)
+        return `${(n / 1_000_000_000_000).toFixed(2)} bilionů`;
+    else if (n < 999_000_000_000_000_000)
+        return `${(n / 1_000_000_000_000_000).toFixed(2)} kvadrilionů`;
+    else
+        return 'kurva hodně';
+}
+
+export const wordForm = (pocet: number, slova: [string, string, string]) => {
+    pocet = Math.abs(pocet);
+
+    if (pocet == 1)
+        return slova[0];
+
+    if (pocet < 5 && pocet > 0)
+        return slova[1];
+
+    return slova[2];
+};
+
+export const [radeksPerSecond, setRadeksPerSecond] = createLocalStorageNumberSignal('radeksPerSecond', 0, false);
+export const [radekCount, setRadekCount] = createLocalStorageNumberSignal('radekCount', 0, false);
 export const [workerCount, setWorkerCount] = createLocalStorageNumberArraySignal('workerCount', new Array(WORKERS.length).fill(0));
+export const [radeksPerClick, setRadeksPerClick] = createLocalStorageNumberSignal('radeksPerClick', 1, true);
 
 const fps = 25;
 
@@ -108,4 +145,6 @@ exportToWindow({
     },
     workerCount,
     setWorkerCount,
+    radeksPerClick,
+    setRadeksPerClick,
 });
