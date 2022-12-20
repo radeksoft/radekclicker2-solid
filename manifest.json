@@ -1,0 +1,10 @@
+{
+    "theme_color" : "#79c4ee",
+    "background_color" : "#6a81b5",
+    "display" : "fullscreen",
+    "scope" : "/",
+    "start_url" : "https://radekclicker.radeksoft.cz",
+    "name" : "Radek Clicker",
+    "short_name" : "Radek Clicker",
+    "description" : "Obdivuj Radka, vytvoř monopol, odejdi jako vítěz."
+}
