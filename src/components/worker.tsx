@@ -1,5 +1,5 @@
 import { Component, createSignal } from 'solid-js';
-import { radekCount, setRadekCount, radeksPerSecond, setRadeksPerSecond, setWorkerCount, workerCount } from '../game';
+import { radekCount, setRadekCount, radeksPerSecond, setRadeksPerSecond, setWorkerCount, workerCount, textOverflow } from '../game';
 import { WORKERS } from '../workers';
 
 // BRUH
@@ -38,28 +38,6 @@ export const Worker: Component<WorkerProps> = props => {
     const buyable = () => radekCount() >= calculateCost();
 
     const [anim, setAnim] = createSignal(false);
-
-    const textOverflow = (n: number) => {
-        if (n < 100)
-            return n.toFixed(1);
-        
-        n = Math.floor(n);
-    
-        if (n < 9_000)
-            return n.toString();
-        else if (n < 999_000)
-            return `${(n / 1_000).toFixed(1)} tisíc`;
-        else if (n < 999_000_000)
-            return `${(n / 1_000_000).toFixed(2)} milionů`;
-        else if (n < 999_000_000_000)
-            return `${(n / 1_000_000_000).toFixed(2)} miliard`;
-        else if (n < 999_000_000_000_000)
-            return `${(n / 1_000_000_000_000).toFixed(2)} bilionů`;
-        else if (n < 999_000_000_000_000_000)
-            return `${(n / 1_000_000_000_000_000).toFixed(2)} kvadrilionů`;
-        else
-            return 'kurva hodně';
-    }
 
     return (
         <div class='flex flex-row border-4 border-slate-300 items-center rounded-2xl bg-slate-200 shadow-md'>
