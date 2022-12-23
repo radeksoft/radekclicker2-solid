@@ -53,7 +53,7 @@ const stringToArray = (s: string) => {
 export const textOverflow = (n: number) => {
     if (n < 100)
         return n.toFixed(1);
-    
+
     n = Math.floor(n);
 
     if (n < 9_000)
@@ -139,15 +139,16 @@ export const restartProgress = () => {
     setWorkerCount(new Array(WORKERS.length).fill(0));
 }
 
-// TODO remove in prod
-exportToWindow({
-    radekCount,
-    setRadekCount,
-    radeksPerSecond,
-    setRadeksPerSecond,
-    restartProgress,
-    workerCount,
-    setWorkerCount,
-    radeksPerClick,
-    setRadeksPerClick,
-});
+if (import.meta.env.DEV) {
+    exportToWindow({
+        radekCount,
+        setRadekCount,
+        radeksPerSecond,
+        setRadeksPerSecond,
+        restartProgress,
+        workerCount,
+        setWorkerCount,
+        radeksPerClick,
+        setRadeksPerClick,
+    });
+}
