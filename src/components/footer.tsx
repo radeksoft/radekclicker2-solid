@@ -13,10 +13,10 @@ export const Footer: Component = () => {
             <div class="flex flex-col w-1/2 pl-2">
                 <a href="https://radeksoft.cz"><img src={logo} alt="Radeksoft logo"/></a>
                 <p class="pb-2 text-xs">© Radeksoft 2022</p>
-                <p class="text-xs underline" onClick={() => {
+                <button class="text-xs underline w-fit" onClick={() => {
                     if (confirm("Tato akce nenávratně odstraní všechen tvůj postup. Klikni na 'Ok' jen pokud chceš začít úplně od začátku."))
-                        restartProgress();  
-                }}>Restart</p>
+                        restartProgress();
+                }}>Restart</button>
             </div>
         </footer>
     );
