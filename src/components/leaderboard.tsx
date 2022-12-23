@@ -34,9 +34,14 @@ export const Leaderboard: Component = () => {
                         ))}
                     </div>
                 ) : (
-                    <div class='flex flex-row'>
-                        <input ref={codeInput} type="text" placeholder="Tvůj kódík" class="uppercase p-2 my-1 rounded-md w-2/3"/>
-                        <button class='px-2 my-1 border shadow rounded-xl mx-auto bg-gradient-to-br from-[#79c4ee]/[.8] to-[#6a81b5]/[.8]' onClick={() => submitCode()}>RADEK!</button>
+                    <div class='flex flex-col'>
+                        <div class='flex flex-row'>
+                            <input ref={codeInput} type="text" placeholder="Tvůj kódík" class="uppercase p-2 my-1 rounded-md w-2/3"/>
+                            <button class='px-2 my-1 mr-0 border shadow rounded-xl mx-auto bg-gradient-to-br from-[#79c4ee]/[.8] to-[#6a81b5]/[.8]' onClick={() => submitCode()}>RADEK!</button>
+                        </div>
+                        <div>
+                            <p class='text-xs pt-1 text-center'>Pokud nemáš kódík na připojení, zeptej se Kubíka.</p>
+                        </div>
                     </div>
                 )}
             </div>
