@@ -1,5 +1,28 @@
 import { createEffect, createSignal } from "solid-js";
+import { LeaderboardData, submitRadekCount } from "./api";
 import { WORKERS } from "./workers";
+
+const createLocalStorageStringSignal = (key: string, defaultValue: string, saveOnChange: boolean) => {
+    const loaded = localStorage.getItem(key);
+    let first: string;
+    if (!loaded) {
+        first = defaultValue;
+    } else {
+        first = loaded;
+    }
+
+    const theSignal = createSignal(first);
+
+    if (saveOnChange) {
+        createEffect(() => {
+            const [signalValue] = theSignal;
+            console.log('effect to LS', key, signalValue());
+            localStorage.setItem(key, signalValue().toString());
+        });
+    }
+
+    return theSignal;
+};
 
 const createLocalStorageNumberSignal = (key: string, defaultValue: number, saveOnChange: boolean) => {
     const loaded = localStorage.getItem(key);
@@ -88,6 +111,8 @@ export const [radeksPerSecond, setRadeksPerSecond] = createLocalStorageNumberSig
 export const [radekCount, setRadekCount] = createLocalStorageNumberSignal('radekCount', 0, false);
 export const [workerCount, setWorkerCount] = createLocalStorageNumberArraySignal('workerCount', new Array(WORKERS.length).fill(0));
 export const [radeksPerClick, setRadeksPerClick] = createLocalStorageNumberSignal('radeksPerClick', 1, true);
+export const [playerCode, setPlayerCode] = createLocalStorageStringSignal('playerCode', '', true);
+export const [leaderboardData, setLeaderboardData] = createSignal<LeaderboardData>([]);
 
 const fps = 25;
 
@@ -121,12 +146,32 @@ setInterval(() => {
     localStorage.setItem('radekCount', radekCount().toString());
 }, 1500);
 
-setInterval(() => {
+setInterval(async () => {
     console.log('sending radekCount', radekCount());
-}, 5000);
+    if (!playerCode())
+        return;
 
+    try {
+        const res = await submitRadekCount(playerCode(), radekCount());
+        setLeaderboardData(res);
+    } catch {
+        // idk man
+        console.error('cant update radekCount')
+    }
+}, 4000);
 
-const exportToWindow = (obj: {[key: string]: any}) => {
+if (playerCode()) {
+    try {
+        const res = await submitRadekCount(playerCode(), radekCount());
+        console.log('wtf i just did top-level await in a browser????')
+        setLeaderboardData(res);
+    } catch {
+        // idk man
+        console.error('cant update radekCount')
+    }
+}
+
+export const exportToWindow = (obj: {[key: string]: any}) => {
     for (const key in obj) {
         window[key] = obj[key];
     }
@@ -137,6 +182,8 @@ export const restartProgress = () => {
     setRadeksPerSecond(0);
     setRadeksPerClick(1);
     setWorkerCount(new Array(WORKERS.length).fill(0));
+    submitRadekCount(playerCode(), 0);
+    setPlayerCode('');
 }
 
 if (import.meta.env.DEV) {
@@ -150,5 +197,9 @@ if (import.meta.env.DEV) {
         setWorkerCount,
         radeksPerClick,
         setRadeksPerClick,
+        playerCode,
+        setPlayerCode,
+        leaderboardData,
+        setLeaderboardData,
     });
 }
