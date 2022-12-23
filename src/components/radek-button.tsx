@@ -1,13 +1,15 @@
 import { Component, createSignal } from 'solid-js';
-import { radekCount, radeksPerClick, setRadekCount, setRadeksPerClick, textOverflow, wordForm } from '../game';
+import { radekCount, radeksPerClick, radeksPerSecond, setRadekCount, setRadeksPerClick, textOverflow, wordForm } from '../game';
 import radekuvYen from "./../public/media/Radekuv_yen.png";
 
 export const RadekButton: Component = () => {
     const [anim, setAnim] = createSignal(false);
     const [buyAnim, setBuyAnim] = createSignal(false);
 
-    const calculateCost = () => 100 + (radeksPerClick() * 2)**2;
-    const buyable = () => radekCount() >= calculateCost();
+    // TODO: make this function better
+    const calculateCost = () => radeksPerClick() * Math.log2(radeksPerClick()) * 100 + 100;
+    const calculateLimit = () => radeksPerClick()**1.2;
+    const buyable = () => radekCount() >= calculateCost() && calculateLimit() <= radeksPerSecond();
 
     const buyMe = () => {
         if (!buyable())
@@ -42,6 +44,7 @@ export const RadekButton: Component = () => {
                     }} onAnimationEnd={() => setBuyAnim(false)}>
                         <span class='font-extrabold'>{textOverflow(calculateCost())} R</span>
                     </button>
+                    <p class={`text-[9px] ${buyable() && 'hidden'}`}>Je potřeba {textOverflow(calculateLimit())} R/s</p>
                 </div>
             </div>
         </div>
