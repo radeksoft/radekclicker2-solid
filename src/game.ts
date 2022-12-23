@@ -132,17 +132,20 @@ const exportToWindow = (obj: {[key: string]: any}) => {
     }
 }
 
+export const restartProgress = () => {
+    setRadekCount(0);
+    setRadeksPerSecond(0);
+    setRadeksPerClick(1);
+    setWorkerCount(new Array(WORKERS.length).fill(0));
+}
+
 // TODO remove in prod
 exportToWindow({
     radekCount,
     setRadekCount,
     radeksPerSecond,
     setRadeksPerSecond,
-    reset() {
-        setRadeksPerSecond(0);
-        setRadekCount(0);
-        setWorkerCount(new Array(WORKERS.length).fill(0));
-    },
+    restartProgress,
     workerCount,
     setWorkerCount,
     radeksPerClick,
