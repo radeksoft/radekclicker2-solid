@@ -1,7 +1,7 @@
 import { Component, createSignal } from 'solid-js';
 import { radekCount, setRadekCount, radeksPerSecond, setRadeksPerSecond, setWorkerCount, workerCount, textOverflow } from '../game';
 import { WORKERS } from '../workers';
-import unknownIcon from '../public/media/placeholder_radek.png';
+import unknownIcon from '../public/worker_icons/Zamek_icon.png';
 
 // BRUH
 export type WorkerProps = {
@@ -58,7 +58,7 @@ export const Worker: Component<WorkerProps> = props => {
                             <p class='text-gray-800 text-xs font-extrabold -mt-1 pb-1'>{unknown() ? "???" : rps} R/s</p>
                         </div>
                         <div class='mt-4'>
-                            <p class='my-auto text-slate-800'>{currentWorkers()}x</p>
+                            <p class='my-auto text-slate-800'>{unknown() ? "" : currentWorkers() + "x"}</p>
                         </div>
                     </div>
                     <p class='text-sm truncate'>{unknown() ? "???" : text}</p>
