@@ -186,6 +186,10 @@ export const restartProgress = () => {
     setPlayerCode('');
 }
 
+export const restartLeaderboard = () => {
+    setPlayerCode('');
+}
+
 if (import.meta.env.DEV) {
     exportToWindow({
         radekCount,
