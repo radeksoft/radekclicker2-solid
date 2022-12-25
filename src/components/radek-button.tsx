@@ -44,7 +44,7 @@ export const RadekButton: Component = () => {
                     }} onAnimationEnd={() => setBuyAnim(false)}>
                         <span class='font-extrabold'>{textOverflow(calculateCost())} R</span>
                     </button>
-                    <p class={`text-[9px] ${buyable() && 'hidden'}`}>Je potřeba {textOverflow(calculateLimit())} R/s</p>
+                    <p class={`text-[9px] ${calculateLimit() < radeksPerSecond() && 'hidden'}`}>Je potřeba {textOverflow(calculateLimit())} R/s</p>
                 </div>
             </div>
         </div>
