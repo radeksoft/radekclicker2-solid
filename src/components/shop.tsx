@@ -23,6 +23,7 @@ export const Shop: Component = () => {
     
     return (
         <div class="flex flex-col gap-4 w-full px-4">
+            <p class='-mb-14 mx-auto text-2xl font-bold pb-1'>Radek shop</p>
             <div class='flex flex-row justify-around border-4 border-slate-300 items-center rounded-2xl bg-slate-200 shadow-md mt-10'>
                 <div class='flex flex-col py-4 pl-2 text-center'>
                     <p class='font-extrabold text-3xl'>{textOverflow(radeksPerClick())}</p>
