@@ -2,6 +2,7 @@ import type { Component } from 'solid-js';
 import { Footer } from './components/footer';
 import { Header } from './components/header';
 import { Leaderboard } from './components/leaderboard';
+import { Music } from './components/music';
 
 import { RadekButton } from './components/radek-button';
 import { RadekCount } from './components/radek-count';
@@ -16,6 +17,7 @@ const App: Component = () => {
                 <RadekButton />
                 <Leaderboard />
                 <Shop />
+                <Music />
             </div>
             <Footer />
         </div>
