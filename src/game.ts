@@ -113,6 +113,7 @@ export const [workerCount, setWorkerCount] = createLocalStorageNumberArraySignal
 export const [radeksPerClick, setRadeksPerClick] = createLocalStorageNumberSignal('radeksPerClick', 1, true);
 export const [playerCode, setPlayerCode] = createLocalStorageStringSignal('playerCode', '', true);
 export const [leaderboardData, setLeaderboardData] = createSignal<LeaderboardData>([]);
+export const [clickCount, setClickCount] = createLocalStorageNumberSignal('clickCount', 0, false);
 
 const fps = 25;
 
@@ -144,6 +145,7 @@ setInterval(() => {
     console.log('storing to LS', radeksPerSecond(), radekCount());
     localStorage.setItem('radeksPerSecond', radeksPerSecond().toString());
     localStorage.setItem('radekCount', radekCount().toString());
+    localStorage.setItem('clickCount', clickCount().toString());
 }, 1500);
 
 setInterval(async () => {
@@ -205,5 +207,7 @@ if (import.meta.env.DEV) {
         setPlayerCode,
         leaderboardData,
         setLeaderboardData,
+        clickCount,
+        setClickCount,
     });
 }

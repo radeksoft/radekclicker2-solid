@@ -1,7 +1,7 @@
 import { Component, createSignal } from 'solid-js';
 
 import { Worker } from '../components/worker';
-import { radekCount, radeksPerClick, radeksPerSecond, setRadekCount, setRadeksPerClick, textOverflow, wordForm } from '../game';
+import { clickCount, radekCount, radeksPerClick, radeksPerSecond, setRadekCount, setRadeksPerClick, textOverflow, wordForm } from '../game';
 
 import { WORKERS } from '../workers';
 
@@ -41,6 +41,8 @@ export const Shop: Component = () => {
                     <p class={`text-[9px] ${calculateLimit() < radeksPerSecond() && 'hidden'}`}>Je potřeba {textOverflow(calculateLimit())} R/s</p>
                 </div>
             </div>
+
+            <p class='mx-2 text-center text-slate-600 text-xs'>{textOverflow(clickCount())} kliknutí</p>
 
             {WORKERS.map((worker, i) => (
                 <Worker worker={worker} index={i} />
