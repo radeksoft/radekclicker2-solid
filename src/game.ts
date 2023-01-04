@@ -114,7 +114,7 @@ export const [radeksPerClick, setRadeksPerClick] = createLocalStorageNumberSigna
 export const [playerCode, setPlayerCode] = createLocalStorageStringSignal('playerCode', '', true);
 export const [leaderboardData, setLeaderboardData] = createSignal<LeaderboardData>([]);
 export const [clickCount, setClickCount] = createLocalStorageNumberSignal('clickCount', 0, false);
-export const [music, setMusic] = createLocalStorageNumberSignal('music', 1, true);
+export const [music, setMusic] = createLocalStorageNumberSignal('music', 0, true);
 
 const fps = 25;
 
@@ -195,31 +195,18 @@ export const restartLeaderboard = () => {
 
 // Thanks Radio Heaven <3
 
-const fade = (audioElement: HTMLAudioElement, fadeIn: boolean, duration: number) => {
-    let volume = audioElement.volume;
-    let interval = setInterval(function () {
-        volume += fadeIn ? 0.1 : -0.1;
-        audioElement.volume = volume;
-        if ((fadeIn && volume >= 1) || (!fadeIn && volume <= 0)) {
-            clearInterval(interval);
-        }
-    }, 10);
-}
-
 const audio = document.getElementById('audio') as HTMLAudioElement;
 
 export const toggleMusic = () => {
     if (music() == 0) {
-        fade(audio, true, 5000);
+        audio.play();
         setMusic(1);
     } 
     else {
-        fade(audio, false, 5000);
+        audio.pause();
         setMusic(0);
     }
 };
-
-audio.play();
 
 if (import.meta.env.DEV) {
     exportToWindow({
