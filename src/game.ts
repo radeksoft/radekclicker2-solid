@@ -114,7 +114,7 @@ export const [radeksPerClick, setRadeksPerClick] = createLocalStorageNumberSigna
 export const [playerCode, setPlayerCode] = createLocalStorageStringSignal('playerCode', '', true);
 export const [leaderboardData, setLeaderboardData] = createSignal<LeaderboardData>([]);
 export const [clickCount, setClickCount] = createLocalStorageNumberSignal('clickCount', 0, false);
-export const [music, setMusic] = createLocalStorageNumberSignal('music', 0, true);
+export const [music, setMusic] = createSignal(0);
 
 const fps = 25;
 
