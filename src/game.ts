@@ -208,6 +208,14 @@ export const toggleMusic = () => {
     }
 };
 
+// bugfix for people who played the beta
+if (workerCount().length < WORKERS.length) {
+    const a = workerCount();
+    const b = Array(WORKERS.length - workerCount().length).fill(0);
+    a.concat(b);
+    setWorkerCount(a);
+}
+
 if (import.meta.env.DEV) {
     exportToWindow({
         radekCount,
