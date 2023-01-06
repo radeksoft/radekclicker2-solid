@@ -1,4 +1,5 @@
 import type { Component } from 'solid-js';
+import { AchievementGrid } from './components/achievement-grid';
 import { Footer } from './components/footer';
 import { Header } from './components/header';
 import { Leaderboard } from './components/leaderboard';
@@ -17,6 +18,7 @@ const App: Component = () => {
                 <RadekButton />
                 <Leaderboard />
                 <Shop />
+                <AchievementGrid />
                 <Music />
             </div>
             <Footer />
