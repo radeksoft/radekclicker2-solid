@@ -11,7 +11,7 @@ export const Footer: Component = () => {
             </div>
             <div class="flex flex-col w-1/2 pl-2">
                 <a href="https://radeksoft.cz"><img src={logo} alt="Radeksoft logo"/></a>
-                <p class="pb-2 text-xs">© Radeksoft 2022</p>
+                <p class="pb-2 text-xs">© Radeksoft 2023</p>
                 <button class="text-xs underline w-fit pb-1" onClick={() => {
                     if (confirm("Tato akce smaže tvůj kódík z paměti. Toto není nenávratné."))
                         restartLeaderboard();
